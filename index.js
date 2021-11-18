@@ -17,6 +17,7 @@ app.use( express.json() )
 // Rutas
 app.use( '/auth', require('./routes/auth') );
 app.use( '/ofertas', require('./routes/ofertas') );
+app.use( '/foro', require('./routes/foro') );
 
 app.listen( process.env.PORT, () => {
     console.log(`Servidor corriendo en puerto ${ process.env.PORT }`);

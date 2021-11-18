@@ -73,10 +73,28 @@ const delOferta = async (req,res) => {
         })
     }
 }
+const agregarFoto = async(req,res) =>{
+    const { img, id } = req.body
+    try {
+        const resp = await pool.query('UPDATE ofertas SET img = $1 WHERE id = $2',[img,id])
+        res.json({
+            ok:true,
+            msg: `Imagen agregada correctamente en la oferta con id : ${id}`,
+        })
+    } catch (error) {
+        res.json({
+            ok:false,
+            msg:'Error al agregar la img',
+            error
+        })
+    }
+}
+
 
 module.exports = {
     getOfertas,
     getOfertaById,
     addOferta,
-    delOferta
+    delOferta,
+    agregarFoto
 }

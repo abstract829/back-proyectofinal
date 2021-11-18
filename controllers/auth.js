@@ -23,7 +23,24 @@ const getUserByEmail = async(req,res) =>{
         
     }
     catch(err){
-        console.log(err)
+        res.json({
+            ok:false,
+            msg: 'Error al enviar el usuario',
+        })
+    }
+}
+const getUserById = async(req,res) =>{
+    const {id} = req.params
+    try{
+        const resp = await pool.query(`SELECT * FROM users WHERE id = $1`, [id])
+            const user = resp.rows[0]
+            res.json({
+                ok:true,
+                msg:'Usuario enviado correctamente',
+                user,
+            })
+    }
+    catch(err){
         res.json({
             ok:false,
             msg: 'Error al enviar el usuario',
@@ -79,9 +96,27 @@ const editarUser = async(req,res) => {
         })
     }
 }
+const agregarFoto = async(req,res) =>{
+    const { img, id } = req.body
+    try {
+        const resp = await pool.query('UPDATE users SET img = $1 WHERE id = $2',[img,id])
+        res.json({
+            ok:true,
+            msg: `Imagen agregada correctamente en el usuario con id : ${id}`,
+        })
+    } catch (error) {
+        res.json({
+            ok:false,
+            msg:'Error al agregar la img',
+            error
+        })
+    }
+}
 module.exports = {
     getUserByEmail,
     revalidarToken,
     crearUsuario,
-    editarUser
+    editarUser,
+    agregarFoto,
+    getUserById
 }
