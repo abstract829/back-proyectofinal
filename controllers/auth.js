@@ -49,6 +49,14 @@ const getUserById = async(req,res) =>{
 }
 const crearUsuario = async(req,res) =>{
     const { email, tipo_user, name, password } = req.body
+    // await pool.query('INSERT INTO users(name, email, password, tipo_user) VALUES ($1, $2, $3, $4)', [name,email,password,tipo_user], (err,res)=>{
+    //     console.log('error', err)
+    //     console.log('resp', res)
+    // })
+    // res.json({
+    //     ok:false
+    // })
+
     try {
         const resp = await pool.query('INSERT INTO users(name, email, password, tipo_user) VALUES ($1, $2, $3, $4)', [name,email,password,tipo_user])
         const user = await pool.query('SELECT * FROM users where email = $1', [email])

@@ -52,7 +52,7 @@ const addOferta = async(req,res) => {
     } catch (error) {
         res.json({
             ok:false,
-            msg:`Error al agregar la oferta con id ${id}`,
+            msg:`Error al agregar la oferta `,
             error
         })
     }
