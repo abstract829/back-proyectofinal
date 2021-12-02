@@ -3,7 +3,7 @@ const { getOfertas, getOfertaById, addOferta, delOferta, agregarFoto } = require
 const router = Router();
 
 router.get( '/get', getOfertas );
-router.post('/byid', getOfertaById)
+router.get('/byid/:id', getOfertaById)
 router.post('/agregar', addOferta)
 router.post('/addfoto', agregarFoto)
 router.delete('/eliminar/:id', delOferta)

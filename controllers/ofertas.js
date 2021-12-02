@@ -16,7 +16,7 @@ const getOfertas = async(req,res) => {
     }
 }
 const getOfertaById = async(req,res) => {
-    const {id} = req.body
+    const {id} = req.params
     try{
         const resp = await pool.query(`SELECT * FROM ofertas WHERE id = $1`, [id])
         if(resp.rows.length > 0){
